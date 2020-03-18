@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import '@/assets/styles/reset.scss';
+import '@/assets/style/reset.scss';
 import Nav from '@/components/Nav.vue'
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
