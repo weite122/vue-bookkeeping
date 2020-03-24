@@ -1,6 +1,6 @@
 <template>
   <svg class="icon">
-    <use :xlink:href="'#'+name"></use>
+    <use :xlink:href="'#'+name" @click="$emit('click', $event)"></use>
   </svg>
 </template>
 <script lang="ts">
@@ -13,7 +13,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .icon{
+  .icon {
     width: 1em; height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
