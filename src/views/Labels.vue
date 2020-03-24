@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    {{tags}}
     <ol class="tags">
       <li v-for="tag in tags" :key="tag.id">
         <span>{{tag.name}}</span>
