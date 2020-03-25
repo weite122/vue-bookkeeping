@@ -49,10 +49,10 @@
     }
     remove() {
       if(this.tag) {
-        if(tagListModel.remove(this.tag.id)) {
-          this.$router.back()
+        if (tagListModel.remove(this.tag.id)) {
+          this.$router.back();
         } else {
-          window.alert('删除失败')
+          window.alert('删除失败');
         }
       }
     }
