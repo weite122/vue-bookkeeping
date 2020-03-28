@@ -1,14 +1,17 @@
 <template>
   <Layout class-prefix="layout">
+    {{record}}
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Types :value.sync="record.type"/>
     <div class="notes">
       <FormItem field-name="备注"
-             placeholder="在这里输入备注"
-             @update:value="onUpdateNotes"
+                placeholder="在这里输入备注"
+                @update:value="onUpdateNotes"
       />
     </div>
     <Tags/>
+    {{count}}
+    <button @click="add">+1</button>
   </Layout>
 </template>
 <script lang="ts">
@@ -22,14 +25,24 @@
 
 
   @Component({
-    components: {Tags, FormItem, Types, NumberPad}
+    components: {Tags, FormItem, Types, NumberPad},
+    computed: {
+      count() {
+        return store.count
+      },
+      recordList() {
+        return store.recordList
+      }
+    }
   })
   export default class Money extends Vue {
-    recordList = store.recordList;
+    add() {
+      store.addCount()
+    }
+
     record: RecordItem = {
       tags: [], notes: '', type: '-', amount: 0
     }
-
 
     onUpdateNotes(value: string) {
       this.record.notes = value
