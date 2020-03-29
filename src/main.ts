@@ -7,7 +7,6 @@ import '@/assets/style/reset.scss';
 import Nav from '@/components/Nav.vue'
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
-import store2 from '@/store/index2.ts';
 
 
 Vue.config.productionTip = false;
