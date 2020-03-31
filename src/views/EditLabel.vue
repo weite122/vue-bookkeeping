@@ -27,9 +27,13 @@
     components: {Button, FormItem}
   })
   export default class EditLabel extends Vue {
-    tag?: Tag = undefined;
+    get tag() {
+      return this.$store.state.currentTag
+    }
 
     created() {
+      const id = this.$route.params.id
+      this.$store.commit('setCurrentTag', id)
       if (!this.tag) {
         this.$router.replace('/404');
       }
@@ -45,7 +49,7 @@
     //     return
     //   }
     // }
-    goBack(){
+    goBack() {
       this.$router.back()
     }
 
@@ -53,7 +57,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .navBar {
+  .navBar {
     text-align: center;
     font-size: 16px;
     padding: 12px 16px;
@@ -61,22 +65,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     > .title {
     }
+
     > .leftIcon {
       width: 24px;
       height: 24px;
     }
+
     > .rightIcon {
       width: 24px;
       height: 24px;
     }
   }
-  .form-wrapper{
+
+  .form-wrapper {
     background: white;
     margin-top: 8px;
   }
-  .button-wrapper{
+
+  .button-wrapper {
     text-align: center;
     padding: 16px;
     margin-top: 44-16px;
