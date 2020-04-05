@@ -11,21 +11,21 @@
 </template>
 
 <style scoped lang="scss">
-  ::v-deep .type-tabs-item {
+  ::v-deep {
     background: white;
-
     &.selected {
       background: #C4C4C4;
-
       &::after {
         display: none;
       }
     }
   }
+  .interval-tabs-item {
+    /*height: 48px;*/
+  }
 </style>
 
 <script lang="ts">
-  import Types from '@/components/Money/Types.vue';
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
@@ -33,7 +33,7 @@
   import recordTypeList from '@/constants/recordTypeList';
 
   @Component({
-    components: {Tabs, Types},
+    components: {Tabs}
   })
   export default class Statistics extends Vue {
     type = '-';
