@@ -41,15 +41,13 @@
     display: flex;
     text-align: center;
     font-size: 24px;
-
-    > &-item {
+     &-item {
       width: 50%;
       height: 64px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-
       &.selected::after {
         content: '';
         position: absolute;
