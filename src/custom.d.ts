@@ -16,6 +16,7 @@ type RecordItem = {
 type Tag = {
   id: string;
   name: string;
+  iconName?: string;
 }
 type TagListModel = {
   data: Tag[];

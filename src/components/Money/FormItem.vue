@@ -1,11 +1,12 @@
 <template>
   <div>
     <label class="formItem">
-      <span class="name">{{this.fieldName}}</span>
+      <span class="name">{{this.fieldName}}:</span>
       <input type="text"
              :value="value"
              @input="onValueChanged($event.target.value)"
              :placeholder="this.placeholder">
+      <span class="name date">日期:</span><input type="date">
     </label>
   </div>
 </template>
@@ -29,20 +30,22 @@
 
 <style lang="scss" scoped>
   .formItem {
-    font-size: 14px;
+    font-size: 12px;
     background: #f5f5f5;
-    padding-left: 16px;
+    justify-content: space-around;
+    padding: 0 16px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     .name {
-      padding-right: 16px;
+      flex-grow: 1;
     }
     input {
       height: 40px;
-      flex-grow: 1;
+      flex-shrink: 1;
       background: transparent;
       border: none;
-      padding-right: 16px;
+
     }
   }
 </style>

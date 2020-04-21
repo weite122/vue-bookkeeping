@@ -62,7 +62,35 @@ const store = new Vuex.Store({
         JSON.stringify(state.recordList));
     },
     fetchTags(state) {
-      state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+      state.tagList = JSON.parse(localStorage.getItem('tagList') || `
+            [
+              {"id": "e46mmdwgnf7",
+              "name": "购物",
+              "iconName": "shopping"},
+              {"id": "zu427xlf3h",
+              "name": "娱乐",
+              "iconName": "happy"},
+              {"id": "k2a3cxa9kvl",
+              "name": "餐饮",
+              "iconName": "eat"},
+              {"id": "1bejsj3xh49",
+              "name": "通信",
+              "iconName": "phone"},
+              {"id": "ipshdvwgr3",
+              "name": "宠物",
+              "iconName": "pet"},
+              {"id": "nkrs864gck",
+              "name": "交通",
+              "iconName": "transportation"},
+              {"id": "gj26q6tsyaf",
+              "name": "学习",
+              "iconName": "study"},
+              {"id": "nxvirwsgdub",
+              "name": "旅行",
+              "iconName": "travel"}
+            ]
+        `);
+      console.log(state.tagList);
       if (!state.tagList || state.tagList.length === 0) {
         store.commit('createTag', '衣');
         store.commit('createTag', '食');

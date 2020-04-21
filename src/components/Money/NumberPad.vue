@@ -5,7 +5,7 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button @click="remove">删除</button>
+      <button @click="remove"><Icon name="delete"/></button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
@@ -98,6 +98,9 @@
         }
         &.zero {
           width: 25*2%;
+        }
+        &:nth-child(4){
+          font-size: 35px;
         }
         $bg: #f2f2f2;
         &:nth-child(1) {

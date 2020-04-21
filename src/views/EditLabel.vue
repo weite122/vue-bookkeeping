@@ -49,7 +49,7 @@
     }
 
     remove() {
-      if (this.currentTag) {
+      if (confirm('确认删除') && this.currentTag) {
         this.$store.commit('removeTag', this.currentTag.id);
       }
     }
@@ -62,6 +62,12 @@
 </script>
 
 <style lang="scss" scoped>
+  ::v-deep .date{
+    visibility: hidden;
+  }
+  ::v-deep input[type='date']{
+    visibility: hidden;
+  }
   .navBar {
     text-align: center;
     font-size: 16px;
@@ -91,6 +97,9 @@
   }
 
   .button-wrapper {
+    >button {
+      background: #FE575E;
+    }
     text-align: center;
     padding: 16px;
     margin-top: 44-16px;
