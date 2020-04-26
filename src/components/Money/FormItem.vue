@@ -6,7 +6,7 @@
              :value="value"
              @input="onValueChanged($event.target.value)"
              :placeholder="this.placeholder">
-      <span class="name date">日期:</span><input type="date">
+      <span class="name date">日期:</span><input :value="dateValue" @input="dateChanged($event.target.value)" type="date">
     </label>
   </div>
 </template>
@@ -18,11 +18,15 @@
   @Component
   export default class FormItem extends Vue {
     @Prop({default: ''}) readonly value!: string;
+    @Prop({default: ''}) readonly dateValue!: string;
     @Prop({required: true}) fieldName!: string;
     @Prop() placeholder?: string
 
     onValueChanged(value: string) {
       this.$emit('update:value', value)
+    }
+    dateChanged(value: string){
+      this.$emit('update:dateValue',value);
     }
   }
 

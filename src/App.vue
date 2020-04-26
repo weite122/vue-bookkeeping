@@ -7,8 +7,8 @@
 
 
 <style lang="scss">
-  @import "~@/assets/style/helper.scss";
-  @import "~@/assets/style/reset.scss";
+  @import "~@/assets/styles/helper.scss";
+  @import "~@/assets/styles/reset.scss";
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

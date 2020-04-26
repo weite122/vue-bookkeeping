@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button @click="createTag">新增标签</button>
+      <router-link class="addLabel" to="/add">新增标签</router-link>
     </div>
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
@@ -23,7 +23,7 @@
 
   @Component
   export default class Tags extends mixins(TagHelper) {
-    selectedTags: string[] = [];
+    selectedTags: Tag[] = [];
 
     get tagList() {
       return this.$store.state.tagList
@@ -33,7 +33,7 @@
       this.$store.commit('fetchTags')
     }
 
-    toggle(tag: string) {
+    toggle(tag: Tag) {
       const index = this.selectedTags.indexOf(tag);
       if (index >= 0) {
         this.selectedTags.splice(index, 1);
@@ -87,7 +87,7 @@
     }
     > .new {
       padding-top: 16px;
-      button {
+      .addLabel {
         background: transparent;
         border: none;
         color: #999;

@@ -90,7 +90,6 @@ const store = new Vuex.Store({
               "iconName": "travel"}
             ]
         `);
-      console.log(state.tagList);
       if (!state.tagList || state.tagList.length === 0) {
         store.commit('createTag', '衣');
         store.commit('createTag', '食');
@@ -98,10 +97,10 @@ const store = new Vuex.Store({
         store.commit('createTag', '行');
       }
     },
-    createTag(state, name: string) {
+    createTag(state, tag: Tag) {
       state.createTagError = null;
       const names = state.tagList.map(item => item.name);
-      if (names.indexOf(name) >= 0) {
+      if (names.indexOf(tag.name) >= 0) {
         state.createTagError = new Error('tag name duplicated');
         return;
       }

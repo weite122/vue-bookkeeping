@@ -1,7 +1,7 @@
 <template>
   <ul class="tabs" :class="{[classPrefix+'-tabs']: classPrefix}">
     <li v-for="item in dataSource" :key="item.value" class="tabs-item"
-        :class="liClass(item)" @click="select(item)">{{item.text}}
+        :class="liClass(item)" @click="select(item)"><h3>{{item.text}}</h3>
     </li>
   </ul>
 </template>
@@ -36,20 +36,33 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/styles/helper.scss';
   .tabs {
-    background: #C4C4C4;
+    background: $color-height;
     display: flex;
     text-align: center;
-    font-size: 24px;
-     &-item {
+    font-size: 16px;
+    font-weight: normal;
+    &-item {
       width: 50%;
-      height: 64px;
+      min-height: 58px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-       &.selected{
-         background:  #ffffff;
+      color: #ffffff;
+      &.selected {
+        &::after {
+          content: '';
+          background: $color-height;
+          height: 2px;
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+        background: #ffffff;
+        color: $color-font;
       }
     }
   }

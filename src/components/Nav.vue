@@ -21,13 +21,14 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~@/assets/style/helper.scss";
+  @import "~@/assets/styles/helper.scss";
   nav {
     @extend %outerShadow;
     display: flex;
     flex-direction: row;
     font-size: 12px;
     > .item {
+      color: $color-font;
       padding: 2px 0;
       width: 33.33333%;
       display: flex;
@@ -40,7 +41,7 @@
       }
     }
     > .item.selected {
-      color: $color-highlight;
+      color: $color-height;
     }
   }
 </style>

@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import '@/assets/style/reset.scss';
+import '@/assets/styles/reset.scss';
 import Nav from '@/components/Nav.vue'
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
@@ -13,7 +13,8 @@ Vue.config.productionTip = false;
 Vue.component('Nav', Nav)
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
-
+import Echart from 'echarts';
+Vue.prototype.$echarts = Echart;
 
 new Vue({
   router,
@@ -31,10 +32,10 @@ window.onload = function () {
 //   window.alert('请使用手机打开本页面，以保证浏览效果');
 //   const img = document.createElement('img');
 //   img.src = './qrcode.png';
-//   img.style.position = 'fixed';
-//   img.style.left = '50%';
-//   img.style.top = '50%';
-//   img.style.transform = 'translate(-50%,-50%)';
-//   img.style.boxShadow = '0 0 10px rgba(0,0,0,0.25)';
+//   img.styles.position = 'fixed';
+//   img.styles.left = '50%';
+//   img.styles.top = '50%';
+//   img.styles.transform = 'translate(-50%,-50%)';
+//   img.styles.boxShadow = '0 0 10px rgba(0,0,0,0.25)';
 //   document.body.appendChild(img);
 // }
