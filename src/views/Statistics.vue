@@ -1,22 +1,29 @@
 <template>
   <Layout>
-    <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-    <ol v-if="groupedList.length>0">
-      <li v-for="(group, index) in groupedList" :key="index">
-        <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
-        <ol>
-          <li v-for="item in group.items" :key="item.id"
-              class="record"
-          >
-            <span>{{tagString(item.tags)}}</span>
-            <span class="notes">{{item.notes}}</span>
-            <span>￥{{item.amount}} </span>
-          </li>
-        </ol>
-      </li>
-    </ol>
-    <div v-else class="noResult">
-      目前没有相关记录
+    <div class="statisticName">
+      <h3>统计</h3>
+    </div>
+    <div>
+      <Tabs :data-source="intervalList" class-prefix="interval" :value.sync="interval"/>
+      <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
+      <ol v-if="groupedList.length>0">
+        <li v-for="(group, index) in groupedList" :key="index">
+          <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
+          <ol>
+            <li v-for="item in group.items" :key="item.id"
+                class="record"
+            >
+              <span class="tag" :key="tag.id" v-for="tag in item.tags"><Icon :name="tag.iconName"/><span
+                class="labelName">{{tag.name}}</span></span>
+              <span class="notes">{{item.notes}}</span>
+              <span>￥{{item.amount}} </span>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div v-else class="noResult">
+        目前没有相关记录
+      </div>
     </div>
   </Layout>
 </template>
@@ -25,6 +32,7 @@
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
   import recordTypeList from '@/constants/recordTypeList';
+  import intervalList from '@/constants/intervalList';
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
 
@@ -32,9 +40,6 @@
     components: {Tabs},
   })
   export default class Statistics extends Vue {
-    tagString(tags: Tag[]) {
-      return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
-    }
 
     beautify(string: string) {
       const day = dayjs(string);
@@ -91,11 +96,21 @@
     }
 
     type = '-';
+    interval = 'day';
+    intervalList = intervalList;
     recordTypeList = recordTypeList;
   }
 </script>
 
 <style scoped lang="scss">
+  .statisticName {
+    text-align: center;
+    min-width: 100vw;
+    padding: 15px 0;
+    background: #56C5B2;
+    font-weight: normal;
+    color: #ffffff;
+  }
   .noResult {
     padding: 16px;
     text-align: center;
@@ -119,6 +134,7 @@
     line-height: 24px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     align-content: center;
   }
   .title {
@@ -127,10 +143,19 @@
   .record {
     background: white;
     @extend %item;
+    > .notes {
+      margin-right: auto;
+      margin-left: 16px;
+      color: #999999;
+    }
+    > .tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .labelName {
+        padding: 0 5px;
+      }
+    }
   }
-  .notes {
-    margin-right: auto;
-    margin-left: 16px;
-    color: #999;
-  }
+
 </style>

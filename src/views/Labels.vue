@@ -1,5 +1,12 @@
 <template>
   <Layout>
+    <div class="labelsManager">
+      <div class="empty"></div>
+      <h3>标签管理</h3>
+      <router-link class="addLabel" to="/add">
+        <Icon name="add"/>
+      </router-link>
+    </div>
     <div class="tags">
       <router-link  class="tag"
                     v-for="tag in tags"
@@ -10,9 +17,7 @@
         <Icon name="right"/>
       </router-link>
     </div>
-    <div class="createTag-wrapper">
-      <Button class="createTag" @click="createTag">新建标签</Button>
-    </div>
+
   </Layout>
 </template>
 
@@ -60,17 +65,25 @@
       }
     }
   }
-  .createTag {
+  .labelsManager{
+    height: 58px;
+    text-align:center;
+    display: flex;
+    min-width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
     background: #56C5B2;
-    color: white;
-    border-radius: 4px;
-    border: none;
-    height: 40px;
-    padding: 0 16px;
-    &-wrapper {
-      text-align: center;
-      padding: 16px;
-      margin-top: 44-16px;
+    font-weight: normal;
+    color: #ffffff;
+    > .addLabel{
+      padding-right: 13px;
+      font-size: 24px;
+    }
+    > .empty{
+      padding-right: 15px;
+      width: 25px;
+      height: 25px;
     }
   }
 </style>

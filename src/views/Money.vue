@@ -5,9 +5,10 @@
       <FormItem field-name="备注"
                 placeholder="在这里输入备注"
                 :value.sync="record.notes"
+                :dateValue.sync="record.createDate"
       />
     </div>
-    <Tags @update:value="record.tags = $event"/>
+    <Tags @update:value="onUpdateNotes"/>
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type"/>
   </Layout>
@@ -28,17 +29,20 @@
   export default class Money extends Vue {
 
     record: RecordItem = {
-      tags: [], notes: '', type: '-', amount: 0
+      tags: [], notes: '', amount: 0, type: '-', createDate: ''
     }
 
-    get recordList() {
-      return this.$store.state.recordList;
-    }
+    // get recordList() {
+    //   return this.$store.state.recordList;
+    // }
 
     recordTypeList = recordTypeList;
 
     created() {
-      this.$store.commit('fetchRecords')
+      const now = new Date();
+      const day = ("0" + now.getDate()).slice(-2);
+      const month = ("0" + (now.getMonth() + 1)).slice(-2);
+      this.record.createDate = now.getFullYear() + "-" + (month) + "-" + (day);
     }
 
     onUpdateNotes(value: string) {
@@ -48,6 +52,11 @@
     saveRecord() {
       if (!this.record.tags || this.record.tags.length === 0) {
         return window.alert('请至少选择一个标签');
+      }else if(this.record.tags.length>2){
+        return window.alert('最多添加三个标签');
+      }
+      if(this.record.amount === 0){
+        return window.alert('请输入金额!')
       }
       this.$store.commit('createRecord', this.record)
       if (this.$store.state.createRecordError === null) {
