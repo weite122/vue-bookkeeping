@@ -21,55 +21,63 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+
   @Component
   export default class Tags extends Vue {
-    myTag: Tag ={id: '',name:'',iconName:''};
+    myTag: Tag = {id: '', name: '', iconName: ''};
     selectedTags: string[] = [];
     tagUnique: string[] = [];
-    goBack(){
+
+    goBack() {
       this.$router.back();
     }
-    get createError(){
+
+    get createError() {
       return this.$store.state.createError;
     }
+
     get tagList() {
       const list = this.$store.state.tagList;
       const array: string[] = [];
-      for(let i =0;i<list.length;i++){
-        if(array.indexOf(list[i].iconName)===-1){
+      for (let i = 0; i < list.length; i++) {
+        if (array.indexOf(list[i].iconName) === -1) {
           array.push(list[i].iconName)
         }
       }
       return array;
     }
-    getTagName(value: string){
-      if(value.length>6){
+
+    getTagName(value: string) {
+      if (value.length > 6) {
         return alert("最多可输六个字");
       }
       this.myTag.name = value;
     }
+
     toggle(tag: string) {
       console.log(this.createError);
-      if(this.selectedTags.length>=1 && tag!==this.selectedTags[0]){
-        return alert('只能选择一个标签创建');
+      if (this.selectedTags.length >= 1 && tag !== this.selectedTags[0]) {
+        return
       }
-      if(this.selectedTags.indexOf(tag)>=0){
+      if (this.selectedTags.indexOf(tag) >= 0) {
         this.selectedTags.splice(0, 1);
-      }else{
+      } else {
         this.selectedTags.push(tag);
       }
     }
+
     createTag() {
-      if(this.selectedTags.length===0){
-        return alert('请选择一个标签');
+      if (this.myTag.name === '') {
+        return alert('请输入标签名!');
       }
       this.myTag.iconName = this.selectedTags[0];
       console.log(this.myTag);
-      this.$store.commit('createTag',this.myTag);
-      if(this.createError==='none'){
+      this.$store.commit('createTag', this.myTag);
+      if (this.createError === 'none') {
         this.$router.back();
       }
     }
+
     created() {
       this.$store.commit('fetchTags');
     }
@@ -102,13 +110,13 @@
     background: #ffffff;
     display: flex;
     flex-direction: column-reverse;
-    > .inputLabel{
+    > .inputLabel {
       font-size: 15px;
       min-height: 10vh;
       display: flex;
       align-items: center;
       padding-left: 23px;
-      input{
+      input {
         background: transparent;
         border: none;
         padding: 10px 10px;
