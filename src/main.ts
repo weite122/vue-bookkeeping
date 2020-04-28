@@ -7,14 +7,18 @@ import '@/assets/styles/reset.scss';
 import Nav from '@/components/Nav.vue'
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
+import message from 'ant-design-vue'
+import 'ant-design-vue/es/message/style/index.css';
+import Echart from 'echarts';
 
 
 Vue.config.productionTip = false;
 Vue.component('Nav', Nav)
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
-import Echart from 'echarts';
+
 Vue.prototype.$echarts = Echart;
+Vue.use(message);
 
 new Vue({
   router,

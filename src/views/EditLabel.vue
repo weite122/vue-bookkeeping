@@ -2,8 +2,8 @@
   <div>
     <div class="navBar">
       <Icon class="leftIcon" name="left" @click="goBack"/>
-      <span class="title">编辑标签</span>
-      <span class="rightIcon"/>
+      <h3 class="title">编辑标签</h3>
+      <Icon class="rightIcon" name="success"/>
     </div>
     <div class="form-wrapper">
       <FormItem :value="currentTag.name"
@@ -62,6 +62,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "~@/assets/styles/helper.scss";
   ::v-deep .date{
     visibility: hidden;
   }
@@ -71,12 +72,12 @@
   .navBar {
     text-align: center;
     font-size: 16px;
-    padding: 12px 16px;
-    background: white;
+    padding: 15px 16px;
+    background: $color-height;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    color: #ffffff;
     > .title {
     }
 

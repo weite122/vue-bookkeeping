@@ -21,7 +21,7 @@
   import Tags from '@/components/Money/Tags.vue';
   import Tabs from '@/components/Tabs.vue'
   import recordTypeList from "@/constants/recordTypeList";
-
+  import message from "ant-design-vue";
 
   @Component({
     components: {Tabs, Tags, FormItem, NumberPad}
@@ -51,12 +51,11 @@
 
     saveRecord() {
       if (!this.record.tags || this.record.tags.length === 0) {
-        return window.alert('请至少选择一个标签');
+        return this.$message.warning('请选择1~3个标签!',1);
       }else if(this.record.tags.length>2){
-        return window.alert('最多添加三个标签');
-      }
-      if(this.record.amount === 0){
-        return window.alert('请输入金额!')
+        return this.$message.warning('标签名太多啦,请重新选择',1);
+      }else if(this.record.amount === 0){
+        return this.$message.warning('您还没有输入金额哦!',1)
       }
       this.$store.commit('createRecord', this.record)
       if (this.$store.state.createRecordError === null) {
