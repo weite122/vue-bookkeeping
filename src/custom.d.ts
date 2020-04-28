@@ -20,7 +20,6 @@ type Total = {
 }
 type RResult = {title: string; total: number;items: RecordItem[]}[];
 
-
 type Tag = {
   id: string;
   name: string;

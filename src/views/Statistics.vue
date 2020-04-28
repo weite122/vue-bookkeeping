@@ -3,9 +3,11 @@
     <div class="statisticName">
       <h3>统计</h3>
     </div>
+    <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
     <div>
-      <Tabs :data-source="intervalList" class-prefix="interval" :value.sync="interval"/>
-      <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
+      <div>
+        <Echarts :total-list="groupedList"/>
+      </div>
       <ol v-if="groupedList.length>0">
         <li v-for="(group, index) in groupedList" :key="index">
           <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span></h3>
@@ -32,12 +34,13 @@
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
   import recordTypeList from '@/constants/recordTypeList';
-  import intervalList from '@/constants/intervalList';
   import dayjs from 'dayjs';
   import clone from '@/lib/clone';
+  import Echarts from '@/components/Echarts.vue';
+  import 'echarts/lib/chart/bar';
 
   @Component({
-    components: {Tabs},
+    components: {Tabs, Echarts},
   })
   export default class Statistics extends Vue {
 
@@ -64,21 +67,23 @@
 
     get groupedList() {
       const {recordList} = this;
+      const array = recordList.filter(r => r.type === this.type);
+      if (array.length === 0) {return [];}
       const newList = clone(recordList)
         .filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
-      if (recordList.length === 0) {
-        return [];
-      }
-      type Result = { title: string; total?: number; items: RecordItem[] }[]
-      const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+      const result: RResult = [{
+        title: dayjs(newList[0].createDate).format('YYYY-MM-DD'),
+        total: 0,
+        items: [newList[0]]
+      }];
       for (let i = 1; i < newList.length; i++) {
         const current = newList[i];
         const last = result[result.length - 1];
         if (dayjs(last.title).isSame(dayjs(current.createdAt), 'day')) {
           last.items.push(current);
         } else {
-          result.push({title: dayjs(current.createdAt).format('YYYY-MM-DD'), items: [current]});
+          result.push({title: dayjs(current.createDate).format('YYYY-MM-DD'), total: 0, items: [current]});
         }
       }
       result.map(group => {
@@ -96,13 +101,16 @@
     }
 
     type = '-';
-    interval = 'day';
-    intervalList = intervalList;
     recordTypeList = recordTypeList;
   }
 </script>
 
 <style scoped lang="scss">
+  #myEcharts {
+    width: 100vw;
+    height: 40vh;
+  }
+
   .statisticName {
     text-align: center;
     min-width: 100vw;
@@ -159,3 +167,4 @@
   }
 
 </style>
+
