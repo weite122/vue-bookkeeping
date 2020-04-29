@@ -8,7 +8,7 @@
                 :dateValue.sync="record.createDate"
       />
     </div>
-    <Tags @update:value="onUpdateNotes"/>
+    <Tags @update:value="getTags"/>
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type"/>
   </Layout>
@@ -45,8 +45,8 @@
       this.record.createDate = now.getFullYear() + "-" + (month) + "-" + (day);
     }
 
-    onUpdateNotes(value: string) {
-      this.record.notes = value
+    getTags(value: Tag[]) {
+      this.record.tags = value
     }
 
     saveRecord() {

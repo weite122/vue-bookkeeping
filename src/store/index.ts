@@ -17,7 +17,7 @@ const store = new Vuex.Store({
     currentTag: undefined
   } as RootState,
   mutations: {
-    changeSuccessState(state){
+    changeSuccessState(state) {
       state.successState = 'none'
     },
     setCurrentTag(state, id: string) {
@@ -156,8 +156,10 @@ const store = new Vuex.Store({
         return state.errorState = 'failed';
       }
       state.errorState = 'none';
-      const id = createId().toString();
-      state.tagList.push({id, name: name});
+      tag.id = createId().toString();
+      // state.tagList.push({id, name: name});
+      // tag.id = Math.random().toString(36).substring(2);
+      state.tagList.unshift(tag);
       store.commit('saveTags');
     },
     saveTags(state) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="tags">
+  <div class="tags">  {{tagList}}
     <div class="new">
       <router-link class="addLabel" to="/add">新增标签</router-link>
     </div>
