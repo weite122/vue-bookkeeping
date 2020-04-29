@@ -26,14 +26,13 @@
   export default class Tags extends Vue {
     myTag: Tag = {id: '', name: '', iconName: ''};
     selectedTags: string[] = [];
-    tagUnique: string[] = [];
 
     goBack() {
       this.$router.back();
     }
 
-    get createError() {
-      return this.$store.state.createError;
+    get errorState() {
+      return this.$store.state.errorState;
     }
 
     get tagList() {
@@ -55,7 +54,7 @@
     }
 
     toggle(tag: string) {
-      console.log(this.createError);
+      console.log(this.errorState);
       if (this.selectedTags.length >= 1 && tag !== this.selectedTags[0]) {
         return
       }
@@ -75,8 +74,10 @@
       this.myTag.iconName = this.selectedTags[0];
       console.log(this.myTag);
       this.$store.commit('createTag', this.myTag);
-      if (this.createError === 'none') {
+      if (this.errorState === 'none') {
         this.$router.back();
+      } else if (this.errorState === 'failed') {
+        this.$message.error('标签名不能重复', 1);
       }
     }
 

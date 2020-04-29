@@ -3,13 +3,11 @@
     <div class="navBar">
       <Icon class="leftIcon" name="left" @click="goBack"/>
       <h3 class="title">编辑标签</h3>
-      <Icon class="rightIcon" name="success"/>
+      <Icon class="rightIcon" name="success" @click="updateTag"/>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="currentTag.name"
-                @update:value="update"
-                field-name="标签名"
-                placeholder="请输入标签名"/>
+      <label class="inputLabel">标签名:<input :value="this.currentTag.name" @input="getTagName($event.target.value)"
+                                           type="text" placeholder="输入你想要的标签名"></label>
     </div>
     <div class="button-wrapper">
       <Button @click="remove">删除标签</Button>
@@ -27,9 +25,7 @@
     components: {Button, FormItem}
   })
   export default class EditLabel extends Vue {
-    get currentTag() {
-      return this.$store.state.currentTag
-    }
+    newLabelName: Tag = {id: '', name: '', iconName: ''};
 
     created() {
       const id = this.$route.params.id
@@ -39,14 +35,35 @@
         this.$router.replace('/404');
       }
     }
-
-    update(name: string) {
-      if (this.currentTag) {
-        this.$store.commit('updateTag', {
-          id: this.currentTag.id, name
-        })
+    get currentTag(){
+      return this.$store.state.currentTag;
+    }
+    get errorState(){
+      return this.$store.state.errorState;
+    }
+    getTagName(value: string){
+      if(value.length> 6){
+        return this.$message.warning("最多可输六个字",1);
+      }
+      this.newLabelName.name = value;
+    }
+    updateTag(){
+      this.newLabelName.id = this.currentTag.id;
+      this.newLabelName.iconName = this.currentTag.iconName;
+      if(this.newLabelName){
+        console.log(this.newLabelName);
+        if(this.newLabelName.name.length===0){
+          return;
+        }
+        this.$store.commit('updateTag',this.newLabelName);
+        console.log(this.errorState);
+        if(this.errorState === 'failed'){
+          return this.$message.warning('标签名重复了',1)
+        }
+        this.$router.back();
       }
     }
+
 
     remove() {
       if (confirm('确认删除') && this.currentTag) {
@@ -63,10 +80,10 @@
 
 <style lang="scss" scoped>
   @import "~@/assets/styles/helper.scss";
-  ::v-deep .date{
+  ::v-deep .date {
     visibility: hidden;
   }
-  ::v-deep input[type='date']{
+  ::v-deep input[type='date'] {
     visibility: hidden;
   }
   .navBar {
@@ -95,10 +112,22 @@
   .form-wrapper {
     background: white;
     margin-top: 8px;
+    > .inputLabel{
+      font-size: 15px;
+      min-height: 10vh;
+      display: flex;
+      align-items: center;
+      padding-left: 23px;
+      input{
+        background: transparent;
+        border: none;
+        padding: 10px 10px;
+      }
+    }
   }
 
   .button-wrapper {
-    >button {
+    > button {
       background: #FE575E;
     }
     text-align: center;
