@@ -17,6 +17,9 @@ const store = new Vuex.Store({
     currentTag: undefined
   } as RootState,
   mutations: {
+    changeSuccessState(state){
+      state.successState = 'none'
+    },
     setCurrentTag(state, id: string) {
       state.currentTag = state.tagList.filter(t => t.id === id)[0]
     },
@@ -67,7 +70,7 @@ const store = new Vuex.Store({
       record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
-      router.replace('/statistics');
+      state.successState = 'success'
     },
     saveRecords(state) {
       window.localStorage.setItem('recordList',

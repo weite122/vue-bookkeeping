@@ -51,16 +51,16 @@
 
     saveRecord() {
       if (!this.record.tags || this.record.tags.length === 0) {
-        return this.$message.warning('请选择1~3个标签!',1);
-      }else if(this.record.tags.length>2){
-        return this.$message.warning('标签名太多啦,请重新选择',1);
-      }else if(this.record.amount === 0){
-        return this.$message.warning('您还没有输入金额哦!',1)
+        return this.$message.warning('请选择1~2个标签!', 1);
+      } else if (this.record.tags.length > 2) {
+        return this.$message.warning('标签名太多啦,请重新选择', 1);
+      } else if (this.record.amount === 0) {
+        return this.$message.warning('您还没有输入金额哦!', 1)
       }
       this.$store.commit('createRecord', this.record)
       if (this.$store.state.createRecordError === null) {
-        window.alert('已保存');
         this.record.notes = '';
+        this.$message.success('添加成功', 1);
       }
     }
   }
