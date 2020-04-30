@@ -42,6 +42,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/styles/helper.scss';
   .tags {
     background: white;
     font-size: 16px;
@@ -73,7 +74,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-    background: #56C5B2;
+    background: $color-height;
     font-weight: normal;
     color: #ffffff;
     > .addLabel{

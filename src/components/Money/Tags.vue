@@ -1,5 +1,5 @@
 <template>
-  <div class="tags">  {{tagList}}
+  <div class="tags">
     <div class="new">
       <router-link class="addLabel" to="/add">新增标签</router-link>
     </div>
@@ -70,7 +70,6 @@
           font-size: 15px;
           background: #d9d9d9;
           padding: 5px;
-          /*border: 1px solid red;*/
         }
         span{
           min-width: 50px;

@@ -128,7 +128,7 @@
 
   .button-wrapper {
     > button {
-      background: #FE575E;
+      background: #4a5363;
     }
     text-align: center;
     padding: 16px;

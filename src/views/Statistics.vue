@@ -88,8 +88,8 @@
       }
       result.map(group => {
         group.total = group.items.reduce((sum, item) => {
-          console.log(sum);
-          console.log(item);
+          // console.log(sum);
+          // console.log(item);
           return sum + item.amount;
         }, 0);
       });
@@ -106,6 +106,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import '~@/assets/styles/helper.scss';
   #myEcharts {
     width: 100vw;
     height: 40vh;
@@ -115,7 +116,7 @@
     text-align: center;
     min-width: 100vw;
     padding: 15px 0;
-    background: #56C5B2;
+    background: $color-height;
     font-weight: normal;
     color: #ffffff;
   }
