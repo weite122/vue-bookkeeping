@@ -54,7 +54,7 @@
     }
 
     toggle(tag: string) {
-      console.log(this.errorState);
+      // console.log(this.errorState);
       if (this.selectedTags.length >= 1 && tag !== this.selectedTags[0]) {
         return
       }
@@ -72,7 +72,7 @@
         return this.$message.warning('请选择一个标签', 1);
       }
       this.myTag.iconName = this.selectedTags[0];
-      console.log(this.myTag);
+      // console.log(this.myTag);
       this.$store.commit('createTag', this.myTag);
       if (this.errorState === 'none') {
         this.$router.back();
