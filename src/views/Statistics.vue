@@ -50,7 +50,6 @@
       if (day.isSame(now, 'day')) {
         return '今天';
       } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
-        console.log('hi');
         return '昨天';
       } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
         return '前天';
@@ -88,8 +87,6 @@
       }
       result.map(group => {
         group.total = group.items.reduce((sum, item) => {
-          // console.log(sum);
-          // console.log(item);
           return sum + item.amount;
         }, 0);
       });
