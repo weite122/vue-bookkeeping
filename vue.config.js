@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/tutu-bookkeeping/'
+    ? '/vue-bookkeeping/'
     : '/',
   lintOnSave: false,
   chainWebpack: config => {
