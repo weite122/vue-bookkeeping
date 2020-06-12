@@ -59,8 +59,8 @@
       flex: 1;
       display: flex;
       align-items: center;
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      overflow-y: auto;
       width: auto;
       > li {
         .icon{
@@ -75,7 +75,7 @@
           min-width: 50px;
         }
         $bg: #d9d9d9;
-        padding: 10px 15px 10px 15px;
+        padding: 10px;
         display: flex;
         align-content: center;
         align-items: center;
